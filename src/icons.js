@@ -13,6 +13,10 @@ function hashPath(path) {
 export function getIcon(icon) {
   let node = document.createElement("div")
   node.className = prefix
+  if(icon.tag_name){
+    node.appendChild(document.createElement("span")).textContent = icon.tag_name
+  }
+  else{
   if (icon.path) {
     let name = "pm-icon-" + hashPath(icon.path).toString(16)
     if (!document.getElementById(name)) buildSVG(name, icon)
@@ -25,6 +29,7 @@ export function getIcon(icon) {
   } else {
     node.appendChild(document.createElement("span")).textContent = icon.text || ''
     if (icon.css) node.firstChild.style.cssText = icon.css
+  }
   }
   return node
 }
